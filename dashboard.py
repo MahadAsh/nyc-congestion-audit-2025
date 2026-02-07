@@ -13,11 +13,13 @@ st.title("2025 NYC Congestion Pricing Audit")
 @st.cache_data
 def load_data():
     try:
-        leakage = pd.read_csv("./outputs/leakage_audit.csv")
-        velocity = pd.read_csv("./outputs/velocity_heatmap.csv")
-        weather = pd.read_csv("./outputs/weather_elasticity.csv")
-        economics = pd.read_csv("./outputs/economics.csv")
-        ghost = pd.read_csv("./outputs/ghost_audit.csv")
+        # UPDATED: Read files directly from the current folder (no "outputs/" prefix)
+        leakage = pd.read_csv("leakage_audit.csv")
+        velocity = pd.read_csv("velocity_heatmap.csv")
+        weather = pd.read_csv("weather_elasticity.csv")
+        economics = pd.read_csv("economics.csv")
+        ghost = pd.read_csv("ghost_audit.csv")
+        
         return leakage, velocity, weather, economics, ghost
     except FileNotFoundError:
         return None, None, None, None, None
@@ -116,4 +118,5 @@ with tab4:
     with col2:
         st.subheader("Surcharge Leakage")
         st.markdown("Top Locations where trips end in the zone but pay **$0 surcharge**.")
+
         st.bar_chart(leakage_df.set_index("pickup_loc")["missing_surcharge_count"])
