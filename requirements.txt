@@ -1,0 +1,10 @@
+streamlit
+polars
+pyarrow
+plotly
+pydeck
+statsmodels
+requests
+openmeteo-requests
+retry-requests
+requests-cache
